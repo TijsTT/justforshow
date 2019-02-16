@@ -1,20 +1,23 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: rgba(30, 30, 30, 1);
+    overflow-x: hidden;
 }
 
 .full {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: rgba(30, 30, 30, 1);
-    &:nth-child(odd) {
-        background-color: rgba(50, 50, 50, 1)
+    @media (min-width: 1280px) {
+        width: 40%;
+        margin: 0 auto;
     }
 }
+
 
 p {
     color: white;

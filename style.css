@@ -1,17 +1,20 @@
 body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  background-color: #1e1e1e;
+  overflow-x: hidden; }
 
 .full {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: #1e1e1e; }
-  .full:nth-child(odd) {
-    background-color: #323232; }
+  flex-direction: column; }
+  @media (min-width: 1280px) {
+    .full {
+      width: 40%;
+      margin: 0 auto; } }
 
 p {
   color: white;
