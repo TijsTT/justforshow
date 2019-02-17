@@ -1,12 +1,12 @@
 ;(function() { 
 
-    console.log('Init just for show ...');
-
     class JFS {
 
         constructor() {
 
-            this.scrollElements = document.querySelectorAll('[data-jfs-scroll]');
+            console.log('Init just for show ...');
+
+            this.scrollElements = document.querySelectorAll('[data-jfs]');
             this.scrollObjects = this.generateScrollObjects();
 
             // Here you can add all kinds of animations =)
@@ -36,15 +36,16 @@
                     added: false
                 },
                 {
-                    name: 'red-animation',
-                    styleStart: 'opacity: 0; color: white; transform: scale(0.8);',
-                    styleEnd: 'opacity: 1; color: red; transform: scale(1);',
+                    name: 'fade-up-inverted',
+                    styleStart: 'opacity: 1; transform: translateY(0px);',
+                    styleEnd: 'opacity: 0; transform: translateY(-20px);',
                     added: false
-                }
+                }    
             ];
             
             this.initScrollElements();
             this.initStyles();
+
             this.watchScroll();
             this.watchWindowResize();
             
@@ -63,7 +64,7 @@
 
                 resizeTimeout = setTimeout(() => {
                     for(let i = 0; i < that.scrollObjects.length; i++) {
-                        that.scrollObjects[i].offsetTop = that.scrollObjects[i].element.offsetTop;
+                        that.scrollObjects[i].offsetTop = that.scrollObjects[i].element.getBoundingClientRect().top + window.scrollY;
                     }
                 }, 500);
                 
@@ -79,7 +80,7 @@
             // This will trigger the animations if the user already scrolled and reloads the page.
             for(let i = 0; i < this.scrollObjects.length; i++) {
 
-                if(this.scrollObjects[i].offsetTop - window.innerHeight + this.scrollObjects[i].animation.offset < window.pageYOffset) {
+                if(this.scrollObjects[i].offsetTop - window.innerHeight + this.scrollObjects[i].animation.offset.start < window.pageYOffset) {
                     // Already add inline styling because otherwise the transition won't work
                     this.scrollObjects[i].element.style.transition = `all ${this.scrollObjects[i].animation.duration} ${this.scrollObjects[i].animation.easing} ${this.scrollObjects[i].animation.delay}`;
                     this.scrollObjects[i].element.classList.add(`jfs-scroll-${this.scrollObjects[i].animation.name}-end`);
@@ -99,7 +100,8 @@
                         // If the animation already triggered, don't execute the rest of the function anymore
                         if(that.scrollObjects[i].animation.triggered) continue;
                         
-                        if(that.scrollObjects[i].offsetTop - window.innerHeight + that.scrollObjects[i].animation.offset < window.pageYOffset) {
+                        if(that.scrollObjects[i].offsetTop - window.innerHeight + that.scrollObjects[i].animation.offset.start < window.pageYOffset) {
+                            that.scrollObjects[i].element.style.transition = `all ${that.scrollObjects[i].animation.duration} ${that.scrollObjects[i].animation.easing} ${that.scrollObjects[i].animation.delay}`;
                             that.scrollObjects[i].element.classList.add(`jfs-scroll-${that.scrollObjects[i].animation.name}-end`);
                             that.scrollObjects[i].animation.triggered = true;
                         }
@@ -113,7 +115,11 @@
                         // If the animation is not triggered atm, don't execute the rest of the function anymore
                         if(!that.scrollObjects[i].animation.triggered) continue;
                         
-                        if(that.scrollObjects[i].animation.rewind && that.scrollObjects[i].offsetTop - window.innerHeight > window.pageYOffset) {
+                        if(!that.scrollObjects[i].animation.rewind) continue;
+
+                        if(!that.scrollObjects[i].animation.animatedrewind) that.scrollObjects[i].element.style.transition = ``;
+
+                        if(that.scrollObjects[i].offsetTop - window.innerHeight - that.scrollObjects[i].animation.offset.end > window.pageYOffset) {
                             that.scrollObjects[i].element.classList.remove(`jfs-scroll-${that.scrollObjects[i].animation.name}-end`);
                             that.scrollObjects[i].animation.triggered = false;
                         }
@@ -139,23 +145,17 @@
 
                 scrollObject.element = this.scrollElements[i];
                 scrollObject.animation = {};
-                scrollObject.animation.name = this.scrollElements[i].getAttribute('data-jfs-scroll') ? this.scrollElements[i].getAttribute('data-jfs-scroll') : "fade-up";
+                scrollObject.animation.name = this.scrollElements[i].getAttribute('data-jfs') ? this.scrollElements[i].getAttribute('data-jfs') : "fade-up";
                 scrollObject.animation.duration = this.scrollElements[i].getAttribute('data-jfs-duration') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-duration'))/1000 + "s" : "0.6s";
                 scrollObject.animation.delay = this.scrollElements[i].getAttribute('data-jfs-delay') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-delay'))/1000 + "s" : "0s";
-                scrollObject.animation.offset = this.scrollElements[i].getAttribute('data-jfs-offset') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset')) : 250;
+                scrollObject.animation.offset = {};
+                scrollObject.animation.offset.start = this.scrollElements[i].getAttribute('data-jfs-offset-start') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset-start')) : 250;
+                scrollObject.animation.offset.end = this.scrollElements[i].getAttribute('data-jfs-offset-end') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset-end')) : 0;
                 scrollObject.animation.easing = this.scrollElements[i].getAttribute('data-jfs-easing') ? this.scrollElements[i].getAttribute('data-jfs-easing') : "ease";
-                scrollObject.animation.rewind = this.scrollElements[i].hasAttribute('data-jfs-rewind') ? true : false;
+                scrollObject.animation.rewind = (this.scrollElements[i].hasAttribute('data-jfs-rewind') || this.scrollElements[i].hasAttribute('data-jfs-offset-end') || this.scrollElements[i].hasAttribute('data-jfs-animatedrewind'));
+                scrollObject.animation.animatedrewind = this.scrollElements[i].hasAttribute('data-jfs-animatedrewind');
                 scrollObject.animation.triggered = false;
-                scrollObject.offsetTop = this.scrollElements[i].offsetTop;
-                
-                // Default scroll object animation object:
-                // animation = {
-                //     name: "fade-up",
-                //     duration: "0.6s",
-                //     offset: 250,
-                //     easing: "ease",
-                //     rewind: false
-                // }
+                scrollObject.offsetTop = this.scrollElements[i].getBoundingClientRect().top + window.scrollY;
 
                 scrollObjects.push(scrollObject);
 
@@ -228,7 +228,5 @@
     }
 
     new JFS();  
-
-
 
 })();

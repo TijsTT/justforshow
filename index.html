@@ -7,22 +7,50 @@
     </head>
     <body>
         
-        <div class="full"></div>
-        <div class="full">
+        <div class="introduction">
+            <h1 data-jfs>justforshow<span>.js</span></h1>
+            <svg data-jfs="fade-up-inverted" data-jfs-offset-start="200" data-jfs-animatedrewind data-jfs-offset-end="-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
 
-            <p data-jfs-scroll="fade-up" data-jfs-rewind>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa ullam debitis voluptatem dolor mollitia architecto enim adipisci vel esse, doloribus accusamus ratione blanditiis placeat, soluta sapiente dignissimos repellat? Hic, veritatis.</p>
+        <div class="containers">
 
-            <p data-jfs-scroll="fade-down" data-jfs-rewind>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa ullam debitis voluptatem dolor mollitia architecto enim adipisci vel esse, doloribus accusamus ratione blanditiis placeat, soluta sapiente dignissimos repellat? Hic, veritatis.</p>
-
-            <p data-jfs-scroll="fade-left" data-jfs-rewind>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa ullam debitis voluptatem dolor mollitia architecto enim adipisci vel esse, doloribus accusamus ratione blanditiis placeat, soluta sapiente dignissimos repellat? Hic, veritatis.</p>
-
-            <p data-jfs-scroll="fade-right" data-jfs-rewind>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa ullam debitis voluptatem dolor mollitia architecto enim adipisci vel esse, doloribus accusamus ratione blanditiis placeat, soluta sapiente dignissimos repellat? Hic, veritatis.</p>
-
-            <p data-jfs-scroll="red-animation" data-jfs-rewind>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa ullam debitis voluptatem dolor mollitia architecto enim adipisci vel esse, doloribus accusamus ratione blanditiis placeat, soluta sapiente dignissimos repellat? Hic, veritatis.</p>
-            
+            <div class="container single-column">
+                <h2 data-jfs>Animations</h2>
+                <div class="example" data-jfs="fade-up" data-jfs-rewind><p>data-jfs="fade-up"</p></div>
+                <div class="example" data-jfs="fade-down" data-jfs-rewind><p>data-jfs="fade-down"</p></div>
+                <div class="example" data-jfs="fade-left" data-jfs-rewind><p>data-jfs="fade-left"</p></div>
+                <div class="example" data-jfs="fade-right" data-jfs-rewind><p>data-jfs="fade-right"</p></div>
+            </div>
+    
+            <div class="container">
+                <h2 data-jfs>Duration</h2>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="400"><p>data-jfs-duration="400"</p></div>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="800"><p>data-jfs-duration="800"</p></div>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="1200"><p>data-jfs-duration="1200"</p></div>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="1600"><p>data-jfs-duration="1600"</p></div>
+            </div>
+    
+            <div class="container">
+                <h2 data-jfs>Delay</h2>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="400"><p>data-jfs-delay="400"</p></div>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="800"><p>data-jfs-delay="800"</p></div>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="1200"><p>data-jfs-delay="1200"</p></div>
+                <div class="example" data-jfs data-jfs-rewind><p>default</div>
+                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="1600"><p>data-jfs-delay="1600"</p></div>
+            </div>
 
         </div>
-        <div class="full"></div>
+
+        <div class="footer">
+            <p>Copyright © 2019 - Made by Tijs Verellen</p>
+        </div>
 
         <script src="./justforshow.js"></script>
         
