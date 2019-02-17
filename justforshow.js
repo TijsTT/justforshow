@@ -2,7 +2,7 @@
 
     class JFS {
 
-        constructor() {
+        constructor(customScrollAnimations = []) {
 
             console.log('Init just for show ...');
 
@@ -34,14 +34,10 @@
                     styleStart: 'opacity: 0; transform: translateX(-20px);',
                     styleEnd: 'opacity: 1; transform: translateX(0);',
                     added: false
-                },
-                {
-                    name: 'fade-up-inverted',
-                    styleStart: 'opacity: 1; transform: translateY(0px);',
-                    styleEnd: 'opacity: 0; transform: translateY(-20px);',
-                    added: false
-                }    
+                }
             ];
+
+            this.addCustomScrollAnimations(customScrollAnimations);
             
             this.initScrollElements();
             this.initStyles();
@@ -49,6 +45,18 @@
             this.watchScroll();
             this.watchWindowResize();
             
+        }
+
+        // Adds the given customScrollAnimations to the available animations array
+        addCustomScrollAnimations(customScrollAnimations) {
+
+            if(!customScrollAnimations.constructor === Array) return;
+
+            for(let i = 0; i < customScrollAnimations.length; i++) {
+                customScrollAnimations[i].added = false;
+            }
+
+            this.availableScrollAnimations = this.availableScrollAnimations.concat(customScrollAnimations);
         }
 
         // Watches for window resize events and recalculates the offset of each scrollElement
@@ -227,6 +235,12 @@
 
     }
 
-    new JFS();  
+    let customAnimation = {
+        name: 'fade-up-inverted',
+        styleStart: 'opacity: 1; transform: translateY(0px);',
+        styleEnd: 'opacity: 0; transform: translateY(-20px);'
+    }    
+
+    new JFS([customAnimation]);  
 
 })();
