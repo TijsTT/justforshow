@@ -43,3 +43,5 @@ Mind that you have to add an array of animation objects. So add as many animatio
 new JFS([animation]);
 ```
 
+Done! :)
+
