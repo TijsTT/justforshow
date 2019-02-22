@@ -36,3 +36,10 @@ var animation = {
 }
 ```
 
+Then you need to pass it as an argument to the JFS class when initiating it.
+Mind that you have to add an array of animation objects. So add as many animations as you like!
+
+```js
+new JFS([animation]);
+```
+
