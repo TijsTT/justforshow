@@ -1,0 +1,23 @@
+{
+  "name": "justforshow",
+  "version": "0.1.0",
+  "description": "Just For Show",
+  "main": "lib/justforshow.js",
+  "scripts": {
+    "build": "babel --presets es2015 -d lib/ src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TijsTT/justforshow.git"
+  },
+  "author": "Tijs Verellen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TijsTT/justforshow/issues"
+  },
+  "homepage": "https://github.com/TijsTT/justforshow#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
