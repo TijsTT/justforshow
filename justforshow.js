@@ -35,6 +35,14 @@ class JFS {
             }
         ];
 
+        this.availableClickAnimations = [
+            {
+                name: 'grow',
+                style: 'transform: scale(1.1)',
+                added: false
+            }
+        ];
+
         this.addCustomScrollAnimations(customScrollAnimations);
         
         this.initScrollElements();
@@ -43,6 +51,17 @@ class JFS {
         this.watchScroll();
         this.watchWindowResize();
         
+    }
+
+    // Animation on click event
+    animateClick(element, animationName) {
+        console.log(element, animationName);
+        for(let i = 0; i < this.availableClickAnimations.length; i++) {
+            if(this.availableClickAnimations[i].name === animationName) {
+                this.availableClickAnimations[i].added = true;
+            }
+        }
+        console.log(this.availableClickAnimations);
     }
 
     // Adds the given customScrollAnimations to the available animations array
