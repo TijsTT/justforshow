@@ -95,7 +95,7 @@ Finally you can also change the scroll offset of the animated object. On default
 <p data-jfs data-jfs-offset-start="500">Hello world!</p>
 ```
 
-In case you want your animation to rewind, it's possible you will need to change the ending offset too. On default this is set to 0px;
+In case you want your animation to rewind, it's possible you will need to change the ending offset too. On default this offset is set to 0px so it will trigger when the element is not anymore in the current view.
 
 ```html
 <p data-jfs data-jfs-offset-end="250">Hello world!</p>
@@ -126,5 +126,5 @@ new JFS([animation]);
 ```
 
 
-## Done! :)
+### Done! :)
 
