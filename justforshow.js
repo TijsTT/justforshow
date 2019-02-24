@@ -2,8 +2,6 @@ class JFS {
 
     constructor(customAnimations = []) {
 
-        // console.log('Init just for show ...');
-
         this.scrollElements = document.querySelectorAll('[data-jfs]');
         this.eventElements = document.querySelectorAll('[data-jfs-event]');
 
@@ -104,7 +102,7 @@ class JFS {
 
         this.availableScrollAnimations = this.availableScrollAnimations.concat(scrollAnimations);
         this.availableEventAnimations = this.availableEventAnimations.concat(eventAnimations);
-        
+
     }
 
     // Watches for window resize events and recalculates the offset of each scrollElement
