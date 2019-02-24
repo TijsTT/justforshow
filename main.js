@@ -6,5 +6,7 @@ var jfs = new JFS([
     }
 ]);
 
-jfs.animateClick(document.getElementById('clicktest'), 'grow');
+document.getElementById('clicktest').onclick = function() {
+    jfs.toggleAnimation(this);
+}
 

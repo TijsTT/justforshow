@@ -1,11 +1,14 @@
 class JFS {
 
-    constructor(customScrollAnimations = []) {
+    constructor(customAnimations = []) {
 
         // console.log('Init just for show ...');
 
         this.scrollElements = document.querySelectorAll('[data-jfs]');
+        this.eventElements = document.querySelectorAll('[data-jfs-event]');
+
         this.scrollObjects = this.generateScrollObjects();
+        this.eventObjects = this.generateEventObjects();
 
         // Here you can add all kinds of animations =)
         this.availableScrollAnimations = [
@@ -35,7 +38,7 @@ class JFS {
             }
         ];
 
-        this.availableClickAnimations = [
+        this.availableEventAnimations = [
             {
                 name: 'grow',
                 style: 'transform: scale(1.1)',
@@ -43,9 +46,11 @@ class JFS {
             }
         ];
 
-        this.addCustomScrollAnimations(customScrollAnimations);
+        this.addCustomAnimations(customAnimations);
         
         this.initScrollElements();
+        this.initEventElements();
+
         this.initStyles();
 
         this.watchScroll();
@@ -54,26 +59,52 @@ class JFS {
     }
 
     // Animation on click event
-    animateClick(element, animationName) {
-        console.log(element, animationName);
-        for(let i = 0; i < this.availableClickAnimations.length; i++) {
-            if(this.availableClickAnimations[i].name === animationName) {
-                this.availableClickAnimations[i].added = true;
+    toggleAnimation(element) {
+
+        let isEventElement = false;
+
+        for(let i = 0; i < this.eventObjects.length; i++) {
+
+            if(this.eventObjects[i].element === element) {
+
+                if(this.eventObjects[i].animation.triggered) {
+                    this.eventObjects[i].element.classList.remove(`jfs-event-${this.eventObjects[i].animation.name}`);
+                    this.eventObjects[i].animation.triggered = false;
+                } else {
+                    this.eventObjects[i].element.style.transition = `${this.eventObjects[i].animation.duration} all ${this.eventObjects[i].animation.easing}`;
+                    this.eventObjects[i].element.style.transitionDelay = this.eventObjects[i].animation.delay;
+                    this.eventObjects[i].element.classList.add(`jfs-event-${this.eventObjects[i].animation.name}`);
+                    this.eventObjects[i].animation.triggered = true;
+                }
+
+                isEventElement = true;
+
+                break;
+               
             }
+
         }
-        console.log(this.availableClickAnimations);
+
+        if(!isEventElement) console.log(`An element needs a data-jfs-event attribute for it to be animatable by JFS.`);
+
     }
 
     // Adds the given customScrollAnimations to the available animations array
-    addCustomScrollAnimations(customScrollAnimations) {
+    addCustomAnimations(customAnimations) {
 
-        if(!customScrollAnimations.constructor === Array) return;
+        if(!customAnimations.constructor === Array) return;
 
-        for(let i = 0; i < customScrollAnimations.length; i++) {
-            customScrollAnimations[i].added = false;
+        let scrollAnimations = [];
+        let eventAnimations = [];
+
+        for(let i = 0; i < customAnimations.length; i++) {
+            customAnimations[i].added = false;
+            customAnimations[i].styleStart ? scrollAnimations.push(customAnimations[i]) : eventAnimations.push(customAnimations[i]);
         }
 
-        this.availableScrollAnimations = this.availableScrollAnimations.concat(customScrollAnimations);
+        this.availableScrollAnimations = this.availableScrollAnimations.concat(scrollAnimations);
+        this.availableEventAnimations = this.availableEventAnimations.concat(eventAnimations);
+        
     }
 
     // Watches for window resize events and recalculates the offset of each scrollElement
@@ -190,6 +221,31 @@ class JFS {
 
     }
 
+    // Bundles all information about scrollElements into scrollObjects so it's easily accessible
+    generateEventObjects() {
+
+        let eventObjects = [];
+
+        for(let i = 0; i < this.eventElements.length; i++) {
+
+            let eventObject = {};
+
+            eventObject.element = this.eventElements[i];
+            eventObject.animation = {};
+            eventObject.animation.name = this.eventElements[i].getAttribute('data-jfs-event') ? this.eventElements[i].getAttribute('data-jfs-event') : "grow";
+            eventObject.animation.duration = this.eventElements[i].getAttribute('data-jfs-duration') ? parseInt(this.eventElements[i].getAttribute('data-jfs-duration'))/1000 + "s" : "0.6s";
+            eventObject.animation.delay = this.eventElements[i].getAttribute('data-jfs-delay') ? parseInt(this.eventElements[i].getAttribute('data-jfs-delay'))/1000 + "s" : "0s";
+            eventObject.animation.easing = this.eventElements[i].getAttribute('data-jfs-easing') ? this.eventElements[i].getAttribute('data-jfs-easing') : "ease";
+            eventObject.animation.triggered = false;
+
+            eventObjects.push(eventObject);
+
+        }
+
+        return eventObjects;
+
+    }
+
     // Initializes all scrollElements so that they are ready to be animated
     initScrollElements() {
 
@@ -216,6 +272,29 @@ class JFS {
 
     }
 
+    // Initializes all scrollElements so that they are ready to be animated
+    initEventElements() {
+
+
+
+        if(!this.eventObjects) return;
+
+        for(let i = 0; i < this.eventObjects.length; i++) {
+
+            for(let j = 0; j < this.availableEventAnimations.length; j++) {
+
+                if(this.availableEventAnimations[j].name === this.eventObjects[i].animation.name) {
+
+                    this.availableEventAnimations[j].added = true;
+
+                }
+
+            }
+
+        }
+
+    }
+
     // Adds the necessary classes to a style tag in the documents head
     initStyles() {
 
@@ -224,6 +303,7 @@ class JFS {
             style = document.createElement('style');
 
         style.type = 'text/css';
+        style.id = 'jfs-styling';
         style.styleSheet ? style.styleSheet.cssText = css : style.appendChild(document.createTextNode(css));
         head.appendChild(style);
 
@@ -241,6 +321,17 @@ class JFS {
                 if(classes !== "") classes += "\n";
                 classes += `.jfs-scroll-${this.availableScrollAnimations[i].name}-start { ${this.availableScrollAnimations[i].styleStart} }\n`;
                 classes += `.jfs-scroll-${this.availableScrollAnimations[i].name}-end { ${this.availableScrollAnimations[i].styleEnd} }`;
+
+            }
+        
+        }
+
+        for(let i = 0; i < this.availableEventAnimations.length; i++) {
+
+            if(this.availableEventAnimations[i].added) {
+
+                if(classes !== "") classes += "\n";
+                classes += `.jfs-event-${this.availableEventAnimations[i].name} { ${this.availableEventAnimations[i].style} }`;
 
             }
         
