@@ -126,5 +126,33 @@ new JFS([animation]);
 ```
 
 
+## Custom default values
+
+To alter the default values for every animation, you can do this by creating an object named 'default' inside an options object. You only have to define the values that you want to change. This example shows all the values that can be altered and set to default for every JFS element.
+
+```js
+var options = {
+    default: {
+        name: 'fade-up',
+        duration: 600,
+        delay: 0,
+        offset: {
+            start: 250,
+            end: 0
+        },
+        easing: 'ease',
+        rewind: false,
+        animatedrewind: false
+    }
+}
+```
+
+After that you only have to pass the newly created object as a second argument to the JFS class. Mind that if you don't have any custom animations, you have to pass an empty array for the first parameter.
+
+```js
+new JFS([], options);
+```
+
+
 ### Done! :)
 

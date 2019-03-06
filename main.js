@@ -5,7 +5,3 @@ var jfs = new JFS([
         styleEnd: 'opacity: 0; transform: translateY(-20px);'
     }
 ]);
-
-document.getElementById('clicktest').onclick = function() {
-    jfs.toggleAnimation(this);
-}

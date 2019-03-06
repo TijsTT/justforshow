@@ -5,3 +5,5 @@ style.scss
 .babelrc
 .gitignore
 justforshow.js
+.sass-cache/
+node_modules/
