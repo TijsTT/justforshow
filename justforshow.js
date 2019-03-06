@@ -39,7 +39,7 @@ class JFS {
         this.availableEventAnimations = [
             {
                 name: 'grow',
-                style: 'transform: scale(1.1)',
+                style: 'transform: scale(1.2)',
                 added: false
             }
         ];

@@ -9,4 +9,3 @@ var jfs = new JFS([
 document.getElementById('clicktest').onclick = function() {
     jfs.toggleAnimation(this);
 }
-
