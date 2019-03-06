@@ -1,7 +1,7 @@
 {
   "name": "justforshow",
-  "version": "0.1.3",
-  "description": "Just For Show",
+  "version": "0.1.4",
+  "description": "Just For Show - customizable on scroll animations",
   "main": "lib/justforshow.js",
   "scripts": {
     "build": "babel --presets es2015 -d lib/ src"
@@ -10,6 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/TijsTT/justforshow.git"
   },
+  "keywords": [
+    "scroll",
+    "animation",
+    "customizable",
+    "events",
+    "transitions",
+    "vanilla js"
+  ],
   "author": "Tijs Verellen",
   "license": "ISC",
   "bugs": {
