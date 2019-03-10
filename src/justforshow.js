@@ -141,9 +141,21 @@ exports.JFS = class {
 
             clearTimeout(resizeTimeout);
 
+            var h = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+
             resizeTimeout = setTimeout(() => {
                 for(let i = 0; i < that.scrollObjects.length; i++) {
-                    that.scrollObjects[i].offsetTop = that.scrollObjects[i].element.getBoundingClientRect().top + window.scrollY;
+
+                    that.scrollObjects[i].offsetTop = that.scrollObjects[i].element.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    that.scrollObjects[i].animation.offset.start = that.scrollObjects[i].element.getAttribute('data-jfs-offset-start') ? parseInt(that.scrollObjects[i].element.getAttribute('data-jfs-offset-start')) : that.defaultValues.offset.start;
+                    that.scrollObjects[i].animation.offset.start = that.scrollObjects[i].animation.offset.start * (h / 1065);
+                    
+                    that.scrollObjects[i].animation.offset.end = that.scrollObjects[i].element.getAttribute('data-jfs-offset-end') ? parseInt(that.scrollObjects[i].element.getAttribute('data-jfs-offset-end')) : that.defaultValues.offset.end;
+                    that.scrollObjects[i].animation.offset.end = that.scrollObjects[i].animation.offset.end * (h / 1065);
+                
                 }
             }, 500);
             
@@ -234,7 +246,7 @@ exports.JFS = class {
             scrollObject.animation.rewind = (this.scrollElements[i].hasAttribute('data-jfs-rewind') || this.scrollElements[i].hasAttribute('data-jfs-offset-end') || this.scrollElements[i].hasAttribute('data-jfs-animatedrewind') || this.defaultValues.animatedrewind || this.defaultValues.rewind);
             scrollObject.animation.animatedrewind = (this.scrollElements[i].hasAttribute('data-jfs-animatedrewind') || this.defaultValues.animatedrewind);
             scrollObject.animation.triggered = false;
-            scrollObject.offsetTop = this.scrollElements[i].getBoundingClientRect().top + window.scrollY;
+            scrollObject.offsetTop = this.scrollElements[i].getBoundingClientRect().top + window.pageYOffset;
 
             scrollObjects.push(scrollObject);
 
