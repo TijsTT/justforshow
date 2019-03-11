@@ -230,6 +230,10 @@ class JFS {
 
         let scrollObjects = [];
 
+        var h = window.innerHeight
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
+
         for(let i = 0; i < this.scrollElements.length; i++) {
 
             let scrollObject = {};
@@ -240,8 +244,8 @@ class JFS {
             scrollObject.animation.duration = this.scrollElements[i].getAttribute('data-jfs-duration') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-duration'))/1000 + "s" : this.defaultValues.duration;
             scrollObject.animation.delay = this.scrollElements[i].getAttribute('data-jfs-delay') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-delay'))/1000 + "s" : this.defaultValues.delay;
             scrollObject.animation.offset = {};
-            scrollObject.animation.offset.start = this.scrollElements[i].getAttribute('data-jfs-offset-start') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset-start')) : this.defaultValues.offset.start;
-            scrollObject.animation.offset.end = this.scrollElements[i].getAttribute('data-jfs-offset-end') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset-end')) : this.defaultValues.offset.end;
+            scrollObject.animation.offset.start = this.scrollElements[i].getAttribute('data-jfs-offset-start') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset-start')) * (h / 1065) : this.defaultValues.offset.start * (h / 1065);
+            scrollObject.animation.offset.end = this.scrollElements[i].getAttribute('data-jfs-offset-end') ? parseInt(this.scrollElements[i].getAttribute('data-jfs-offset-end')) * (h / 1065) : this.defaultValues.offset.end * (h / 1065);
             scrollObject.animation.easing = this.scrollElements[i].getAttribute('data-jfs-easing') ? this.scrollElements[i].getAttribute('data-jfs-easing') : this.defaultValues.easing;
             scrollObject.animation.rewind = (this.scrollElements[i].hasAttribute('data-jfs-rewind') || this.scrollElements[i].hasAttribute('data-jfs-offset-end') || this.scrollElements[i].hasAttribute('data-jfs-animatedrewind') || this.defaultValues.animatedrewind || this.defaultValues.rewind);
             scrollObject.animation.animatedrewind = (this.scrollElements[i].hasAttribute('data-jfs-animatedrewind') || this.defaultValues.animatedrewind);

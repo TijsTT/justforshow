@@ -1,6 +1,6 @@
 {
   "name": "justforshow",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Just For Show - customizable on scroll animations",
   "main": "lib/justforshow.js",
   "scripts": {
