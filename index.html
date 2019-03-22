@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Quicksand:300" rel="stylesheet">
         <link href="./style.css" rel="stylesheet" type="text/css">
+        <link href="./utilities.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         
-        <div class="introduction">
-            <h1 data-jfs>justforshow<span>.js</span></h1>
-            <svg data-jfs="fade-up-inverted" data-jfs-offset-start="200" data-jfs-animatedrewind data-jfs-offset-end="-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"/></svg>
+        <div class="relative w-full h-screen flex flex-col justify-center items-center bg-white">
+            <h1 class="text-black font-bold text-5xl mb-8" data-jfs>justforshow</h1>
+            <p class="text-grey-darkest">Customizable and easy to use on scroll animations</p>
+            <svg class="mx-auto mb-4 absolute pin-b" data-jfs="fade-up-inverted" data-jfs-offset-start="200" data-jfs-animatedrewind data-jfs-offset-end="-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
 
-        <div class="containers">
-
-            <div class="container">
-                <h2 data-jfs>Animations</h2>
-                <div class="example" data-jfs="fade-up" data-jfs-rewind><p>data-jfs="fade-up"</p></div>
-                <div class="example" data-jfs="fade-down" data-jfs-rewind><p>data-jfs="fade-down"</p></div>
-                <div class="example" data-jfs="fade-left" data-jfs-rewind><p>data-jfs="fade-left"</p></div>
-                <div class="example" data-jfs="fade-right" data-jfs-rewind><p>data-jfs="fade-right"</p></div>
+        <div class="w-full p-4 py-32 sm:p-32 md:p-64 bg-grey-lighter">
+            <h2 data-jfs class="mb-8 text-3xl text-black font-bold text-left md:text-center">Animations</h2>
+            <div class="flex flex-wrap font-thin text-grey-darkest">
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs="fade-up" data-jfs-rewind><p>data-jfs="fade-up"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs="fade-down" data-jfs-rewind><p>data-jfs="fade-down"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs="fade-left" data-jfs-rewind><p>data-jfs="fade-left"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs="fade-right" data-jfs-rewind><p>data-jfs="fade-right"</p></div>
             </div>
-    
-            <div class="container">
-                <h2 data-jfs>Duration</h2>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="400"><p>data-jfs-duration="400"</p></div>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="800"><p>data-jfs-duration="800"</p></div>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="1200"><p>data-jfs-duration="1200"</p></div>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-duration="1600"><p>data-jfs-duration="1600"</p></div>
-            </div>
-    
-            <div class="container">
-                <h2 data-jfs>Delay</h2>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="400"><p>data-jfs-delay="400"</p></div>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="800"><p>data-jfs-delay="800"</p></div>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="1200"><p>data-jfs-delay="1200"</p></div>
-                <div class="example" data-jfs data-jfs-rewind><p>default</div>
-                <div class="example" data-jfs data-jfs-rewind data-jfs-delay="1600"><p>data-jfs-delay="1600"</p></div>
-            </div>
-
         </div>
 
-        <div class="footer">
-            <p>Copyright © 2019 - Made by Tijs Verellen</p>
+        <div class="w-full p-4 py-32 md:p-32">
+            <h2 data-jfs class="mb-8 text-3xl text-black font-bold text-left md:text-center">Duration</h2>
+            <div class="flex flex-wrap font-thin text-grey-darkest">
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-duration="400"><p>data-jfs-duration="400"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-duration="800"><p>data-jfs-duration="800"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-duration="1200"><p>data-jfs-duration="1200"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-duration="1600"><p>data-jfs-duration="1600"</p></div>
+            </div>   
+        </div>
+
+        <div class="w-full p-4 py-32 md:p-32 bg-grey-lighter">
+            <h2 data-jfs class="mb-8 text-3xl text-black font-bold text-left md:text-center">Delay</h2>
+            <div class="flex flex-wrap font-thin text-grey-darkest">
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-delay="400"><p>data-jfs-delay="400"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-delay="800"><p>data-jfs-delay="800"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-delay="1200"><p>data-jfs-delay="1200"</p></div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind><p>default</div>
+                <div class="w-1/2 flex justify-start md:justify-center mb-4" data-jfs data-jfs-rewind data-jfs-delay="1600"><p>data-jfs-delay="1600"</p></div>
+            </div>
+        </div>
+
+        <div class="w-full p-4 bg-black text-white">
+            <p class="text-center font-thin text-grey-darkest">Copyright © 2019 - Made by Tijs Verellen</p>
         </div>
 
         <script src="./justforshow.js"></script>
