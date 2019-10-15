@@ -76,8 +76,8 @@ exports.JFS = class {
             duration: options.default.duration ? parseInt(options.default.duration)/1000 + "s" : "0.6s",
             delay: options.default.delay ? parseInt(options.default.delay)/1000 + "s" : "0s",
             offset: {
-                start: options.default.offset.start || 250,
-                end: options.default.offset.end || 0
+                start: parseInt(options.default.offset.start) || 250,
+                end: parseInt(options.default.offset.end) || 0
             },
             easing: options.default.easing || 'ease',
             rewind: options.default.rewind || false,
@@ -328,23 +328,14 @@ exports.JFS = class {
 
     // Initializes all scrollElements so that they are ready to be animated
     initEventElements() {
-
-
-
         if(!this.eventObjects) return;
 
         for(let i = 0; i < this.eventObjects.length; i++) {
-
             for(let j = 0; j < this.availableEventAnimations.length; j++) {
-
                 if(this.availableEventAnimations[j].name === this.eventObjects[i].animation.name) {
-
                     this.availableEventAnimations[j].added = true;
-
                 }
-
             }
-
         }
 
     }

@@ -153,6 +153,5 @@ After that you only have to pass the newly created object as a second argument t
 new JFS([], options);
 ```
 
-
 ### Done! :)
 
