@@ -3,6 +3,7 @@ class JFS {
     constructor(customAnimations = [], options = {}) {
 
         this.defaultValues = this.generateDefaults(options);
+        this.preloader = document.getElementById('preloader');
 
         this.scrollElements = document.querySelectorAll('[data-jfs]');
         this.eventElements = document.querySelectorAll('[data-jfs-event]');
@@ -50,12 +51,18 @@ class JFS {
         
         this.initScrollElements();
         this.initEventElements();
-
         this.initStyles();
-
+        
+        this.handlePreloader();
         this.watchScroll();
         this.watchWindowResize();
         
+    }
+
+    handlePreloader() {
+        if(this.preloader) { 
+            this.preloader.style.display = "none" 
+        };
     }
 
     generateDefaults(options) {
@@ -69,8 +76,8 @@ class JFS {
             duration: options.default.duration ? parseInt(options.default.duration)/1000 + "s" : "0.6s",
             delay: options.default.delay ? parseInt(options.default.delay)/1000 + "s" : "0s",
             offset: {
-                start: options.default.offset.start || 250,
-                end: options.default.offset.end || 0
+                start: parseInt(options.default.offset.start) || 250,
+                end: parseInt(options.default.offset.end) || 0
             },
             easing: options.default.easing || 'ease',
             rewind: options.default.rewind || false,
@@ -82,7 +89,7 @@ class JFS {
     }
 
     // Animation on click event
-    toggleAnimation(element) {
+    toggleAnimation(element, callback) {
 
         let isEventElement = false;
 
@@ -101,6 +108,9 @@ class JFS {
                 }
 
                 isEventElement = true;
+
+                this.eventObjects[i].element.addEventListener("webkitTransitionEnd", callback);
+                this.eventObjects[i].element.addEventListener("transitionend", callback);
 
                 break;
                
@@ -160,6 +170,11 @@ class JFS {
             }, 500);
             
         }
+
+        // Initialize resize event to fix wrong pageYOffset values. This fix is temporary because I can't find the reason why they are incorrect.
+        var event = document.createEvent('HTMLEvents');
+        event.initEvent('resize', true, false);
+        window.dispatchEvent(event);
         
     }
 
@@ -313,23 +328,14 @@ class JFS {
 
     // Initializes all scrollElements so that they are ready to be animated
     initEventElements() {
-
-
-
         if(!this.eventObjects) return;
 
         for(let i = 0; i < this.eventObjects.length; i++) {
-
             for(let j = 0; j < this.availableEventAnimations.length; j++) {
-
                 if(this.availableEventAnimations[j].name === this.eventObjects[i].animation.name) {
-
                     this.availableEventAnimations[j].added = true;
-
                 }
-
             }
-
         }
 
     }
@@ -343,6 +349,7 @@ class JFS {
 
         style.type = 'text/css';
         style.id = 'jfs-styling';
+        style.media = 'screen';
         style.styleSheet ? style.styleSheet.cssText = css : style.appendChild(document.createTextNode(css));
         head.appendChild(style);
 

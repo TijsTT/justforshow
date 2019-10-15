@@ -3,6 +3,7 @@ exports.JFS = class {
     constructor(customAnimations = [], options = {}) {
 
         this.defaultValues = this.generateDefaults(options);
+        this.preloader = document.getElementById('preloader');
 
         this.scrollElements = document.querySelectorAll('[data-jfs]');
         this.eventElements = document.querySelectorAll('[data-jfs-event]');
@@ -50,12 +51,18 @@ exports.JFS = class {
         
         this.initScrollElements();
         this.initEventElements();
-
         this.initStyles();
-
+        
+        this.handlePreloader();
         this.watchScroll();
         this.watchWindowResize();
         
+    }
+
+    handlePreloader() {
+        if(this.preloader) { 
+            this.preloader.style.display = "none" 
+        };
     }
 
     generateDefaults(options) {
@@ -82,7 +89,7 @@ exports.JFS = class {
     }
 
     // Animation on click event
-    toggleAnimation(element) {
+    toggleAnimation(element, callback) {
 
         let isEventElement = false;
 
@@ -101,6 +108,9 @@ exports.JFS = class {
                 }
 
                 isEventElement = true;
+
+                this.eventObjects[i].element.addEventListener("webkitTransitionEnd", callback);
+                this.eventObjects[i].element.addEventListener("transitionend", callback);
 
                 break;
                
@@ -160,6 +170,11 @@ exports.JFS = class {
             }, 500);
             
         }
+
+        // Initialize resize event to fix wrong pageYOffset values. This fix is temporary because I can't find the reason why they are incorrect.
+        var event = document.createEvent('HTMLEvents');
+        event.initEvent('resize', true, false);
+        window.dispatchEvent(event);
         
     }
 
@@ -343,6 +358,7 @@ exports.JFS = class {
 
         style.type = 'text/css';
         style.id = 'jfs-styling';
+        style.media = 'screen';
         style.styleSheet ? style.styleSheet.cssText = css : style.appendChild(document.createTextNode(css));
         head.appendChild(style);
 

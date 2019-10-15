@@ -9,3 +9,11 @@ var jfs = new JFS([
         rewind: true,
     }
 });
+
+document.querySelector('[data-element-grow]').addEventListener('click', function() {
+    jfs.toggleAnimation(document.querySelector('[data-element-grow]'), () => {
+        jfs.toggleAnimation(document.querySelector('[data-element-grow]'));
+    });
+});
+
+

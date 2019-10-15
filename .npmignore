@@ -2,6 +2,8 @@ index.html
 main.js
 style.css
 style.scss
+utilities.css
+.DS_Store
 .babelrc
 .gitignore
 justforshow.js
