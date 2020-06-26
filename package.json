@@ -1,11 +1,20 @@
 {
   "name": "justforshow",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "Just For Show - customizable on scroll animations",
+  "homepage": "https://github.com/TijsTT/justforshow#readme",
+  "bugs": {
+    "url": "https://github.com/TijsTT/justforshow/issues"
+  },
+  "author": "Tijs Verellen",
+  "license": "ISC",
   "main": "lib/justforshow.js",
   "scripts": {
-    "build": "babel --presets es2015 -d lib/ src",
-    "front": "npx tailwind build tailwind.css -o ./style.css -c tailwind.js --no-autoprefixer"
+    "dev": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
+    "watch": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
+    "hot": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
+    "prod": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
+    "build": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.mix.js"
   },
   "repository": {
     "type": "git",
@@ -19,16 +28,15 @@
     "transitions",
     "vanilla js"
   ],
-  "author": "Tijs Verellen",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TijsTT/justforshow/issues"
-  },
-  "homepage": "https://github.com/TijsTT/justforshow#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "tailwindcss": "^0.7.4"
+    "cross-env": "^7.0.2",
+    "laravel-mix": "^5.0.4",
+    "node-sass": "^4.14.1",
+    "resolve-url-loader": "^3.1.0",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
   },
-  "dependencies": {}
+  "dependencies": {
+    "tailwindcss": "^1.4.6"
+  }
 }
