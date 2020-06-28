@@ -1,42 +1,31 @@
 {
   "name": "justforshow",
   "version": "0.2.0",
-  "description": "Just For Show - customizable on scroll animations",
+  "description": "On scroll event listeners based on the Intersection Observer API",
   "homepage": "https://github.com/TijsTT/justforshow#readme",
   "bugs": {
     "url": "https://github.com/TijsTT/justforshow/issues"
   },
-  "author": "Tijs Verellen",
-  "license": "ISC",
-  "main": "lib/justforshow.js",
+  "main": "dist/justforshow.js",
   "scripts": {
-    "dev": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
-    "watch": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
-    "hot": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
-    "prod": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.front.mix.js",
-    "build": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --env.mixfile=webpack.mix.js"
+    "bundle": "rollup --config rollup.config.js",
+    "build": "npx babel dist/justforshow.js --out-dir dist"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TijsTT/justforshow.git"
   },
-  "keywords": [
-    "scroll",
-    "animation",
-    "customizable",
-    "events",
-    "transitions",
-    "vanilla js"
-  ],
+  "keywords": [],
   "devDependencies": {
-    "cross-env": "^7.0.2",
-    "laravel-mix": "^5.0.4",
-    "node-sass": "^4.14.1",
-    "resolve-url-loader": "^3.1.0",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "rollup": "^2.18.1"
   },
   "dependencies": {
-    "tailwindcss": "^1.4.6"
-  }
+    "build": "^0.1.4",
+    "bundle": "^2.1.0"
+  },
+  "author": "Tijs Verellen",
+  "license": "MIT"
 }

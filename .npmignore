@@ -3,10 +3,6 @@
 
 node_modules/
 src/
-resources/
-public/
 
-webpack.front.mix.js
-webpack.mix.js
-mix-manifest.json
-tailwind.config.js
+rollup.config.js
+.babelrc
