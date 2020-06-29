@@ -9,7 +9,8 @@
   "main": "dist/justforshow.js",
   "scripts": {
     "bundle": "rollup --config rollup.config.js",
-    "build": "npx babel dist/justforshow.js --out-dir dist"
+    "build": "npx babel dist/justforshow.js --out-dir dist",
+    "prod": "npm run bundle && npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,10 @@
     "@babel/cli": "^7.10.3",
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
+    "babel-preset-minify": "^0.5.1",
     "rollup": "^2.18.1"
   },
-  "dependencies": {
-    "build": "^0.1.4",
-    "bundle": "^2.1.0"
-  },
+  "dependencies": {},
   "author": "Tijs Verellen",
   "license": "MIT"
 }

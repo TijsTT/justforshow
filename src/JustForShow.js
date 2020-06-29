@@ -1,10 +1,10 @@
+import { IntersectionObserverPolyFill } from './IntersectionObserverPolyfill';
 import { AnimateFrom } from './AnimateFrom';
 import { LazyLoadingImage } from './LazyLoadingImage';
 
-/**
- * The JustForShow object 
- */
-class JustForShow {
+IntersectionObserverPolyFill();
+
+export default class JustForShow {
     constructor(selector, options) {
         this.selector = selector;
 
@@ -201,5 +201,3 @@ class JustForShow {
         ];
     }
 }
-
-export { JustForShow };
