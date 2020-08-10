@@ -6,7 +6,7 @@
  *  https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  *
  */
-const IntersectionObserverPolyFill = function() {
+const IntersectionObserverPolyFill = () => {
     'use strict';
     
     // Exit early if we're not running in a browser.

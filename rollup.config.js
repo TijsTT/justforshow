@@ -3,7 +3,7 @@
  * Documentation can be found here: https://rollupjs.org/guide/en/#quick-start
  */
 export default {
-    input: 'src/JustForShow.js',
+    input: 'src/index.js',
     output: {
         file: 'dist/justforshow.js',
     }
