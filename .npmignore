@@ -1,13 +1,4 @@
-index.html
-main.js
-style.css
-style.scss
-utilities.css
 .DS_Store
-.babelrc
 .gitignore
-justforshow.js
-.sass-cache/
-node_modules/
-tailwind.css
-tailwind.js
+
+node_modules

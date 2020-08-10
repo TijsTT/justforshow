@@ -1,34 +1,30 @@
 {
   "name": "justforshow",
-  "version": "0.1.11",
-  "description": "Just For Show - customizable on scroll animations",
-  "main": "lib/justforshow.js",
+  "version": "0.2.0",
+  "description": "On scroll event listeners based on the Intersection Observer API",
+  "homepage": "https://github.com/TijsTT/justforshow#readme",
+  "bugs": {
+    "url": "https://github.com/TijsTT/justforshow/issues"
+  },
+  "main": "dist/justforshow.js",
   "scripts": {
-    "build": "babel --presets es2015 -d lib/ src",
-    "front": "npx tailwind build tailwind.css -o ./style.css -c tailwind.js --no-autoprefixer"
+    "bundle": "rollup --config rollup.config.js",
+    "build": "npx babel dist/justforshow.js --out-dir dist",
+    "prod": "npm run bundle && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TijsTT/justforshow.git"
   },
-  "keywords": [
-    "scroll",
-    "animation",
-    "customizable",
-    "events",
-    "transitions",
-    "vanilla js"
-  ],
-  "author": "Tijs Verellen",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TijsTT/justforshow/issues"
-  },
-  "homepage": "https://github.com/TijsTT/justforshow#readme",
+  "keywords": [],
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "tailwindcss": "^0.7.4"
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "babel-preset-minify": "^0.5.1",
+    "rollup": "^2.18.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "author": "Tijs Verellen",
+  "license": "MIT"
 }
