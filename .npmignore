@@ -2,3 +2,6 @@
 .gitignore
 
 node_modules
+
+TODO.md
+README_v0.1.md
