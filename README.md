@@ -40,7 +40,7 @@ import { JustForShow } from 'justforshow';
 new JustForShow('[data-jfs]', 'animate-from');
 ```
 
-In the example above, JFS will be watching for scroll events of the elements with the given selector `'[data-jfs]'`. This needs to be passed as a string as the first parameter. The callback of those scroll events depends on the second parameter, which hold the options. If a string is passed, then JFS will try to look for an included preset with the given name, e.g 'animate-from'. Otherwise it expects an object which allows for much more detailed options to be set.
+In the example above, JFS will be watching for scroll events of the elements with the given selector `'[data-jfs]'`. This needs to be passed as a string as the first parameter. The callback of those scroll events depends on the second parameter, which hold the options. If a string is passed, then JFS will try to look for an included preset with the given name, e.g `'animate-from'`. Otherwise it expects an object which allows for much more detailed options to be set.
 
 Example of the JFS options, which are all set to their default values:
 ```js
