@@ -90,7 +90,7 @@ new JustForShow('[data-jfs]', 'animate-from');
 // });
 ```
 
-For JustForShow to create event listeners for this element, we need to make sure the chosen selector corresponds with the element:
+For JustForShow to create event listeners for this element, we need to make sure the chosen selector corresponds with the element we want to animate:
 ```diff
 <body>
     <!-- Fullscreen element so we can see the on scroll animation magic -->
@@ -102,7 +102,12 @@ For JustForShow to create event listeners for this element, we need to make sure
 </body>
 ```
 
-`AnimateFrom` will trigger animations on scroll based on the JFS event listeners. Whenever the `onEnterBottom` event triggers, the callback will add any chosen CSS classes to the element. But how do you define those classes? Like this:
+On initialization, `AnimateFrom` will add one or more chosen classes to the element. While scrolling the page, whenever the `onEnterBottom` event triggers for this element, the callback will remove all the choses classes from the element which you can combine - for example - with CSS transitions to create animations.
+
+***Why does it work this way?**<br>
+By first adding classes and later removing them on scroll, your base styling is completely independent from the workings of your JavaScript. If for any reason JavaScript doesn't work on the page - which would obviously never ever happen in your project - it won't leave elements hanging, waiting for Javascript to animate it to the state it needs to be. They will still have the expected styling, just without those slick animations.*
+
+Here is how you define the classes where the element *will animate from*:
 ```diff
 <body>
     <!-- Fullscreen element so we can see the on scroll animation magic -->
@@ -114,7 +119,7 @@ For JustForShow to create event listeners for this element, we need to make sure
 </body>
 ```
 
-Et voila! If you now scroll the element in view, its color will change from black to grey. Very fancy 😎
+Et voila! If you now scroll the element in view, its color will change from grey to black. Very fancy! 😎
 
 ## Browser support
 The IntersectionObserver API is relatively new. Despite that it's supported by all major browser, except for IE. That's why this package also includes [this intersection observer polyfill](https://www.npmjs.com/package/intersection-observer). Props to them! 
