@@ -1,18 +1,18 @@
-/* 
+/*
     Aditional attributes for AnimateFrom:
-    -   data-jfs-from-repeat
+    -   data-jfs-repeat
 */
 class AnimateFrom {
     constructor(element) {
         this.element = element;
-        
+
         this._animateFromAttribute = 'data-jfs-from';
         this._animateRepeatAttribute = 'data-jfs-repeat';
 
         this.classes = this.element.getAttribute(this._animateFromAttribute) ? this.element.getAttribute(this._animateFromAttribute).split(' ') : [];
         this.repeat = (typeof this.element.getAttribute(this._animateRepeatAttribute) === "string");
         this.intersected = false;
-    
+
         this._init();
     }
 

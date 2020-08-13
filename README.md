@@ -2,9 +2,9 @@
 *Note: this documentation is still under construction. If you have any questions, just open an issue!*
 
 JustForShow is a dependency-free package built using the Intersection Observer API.<br>
-It provides event listeners to make it easier for you to implement on scroll functionality.
+It provides some simple hooks to make it easier for you to implement on scroll functionality in your project.
 
-Apart from these on scroll event listeners, JustForShow also includes a few built-in modules to make use of them. 
+Apart from calling these hooks while scrolling, JustForShow also includes a few built-in modules to make use of them.
 
 Modules which are currently included:
 -   `AnimateFrom`: on scroll animation based on CSS classes (works great with tailwindcss)
@@ -29,56 +29,63 @@ import { IntersectionObserverPolyfill } from 'justforshow';
 import { JustForShow, IntersectionObserverPolyfill } from 'justforshow';
 ```
 
-Importing the JustForShow module will also include the `AnimateFrom` and `LazyLoadingImage` module, as it can't work without these modules. Any other module can be imported on its own to reduce filesize if you would want to.
+Importing the JustForShow module will also include the `AnimateFrom` and `LazyLoadingImage` module, as it can't work without these modules. Any other module can be imported on its own to reduce file size if you would want to.
 
 ## Usage
 Most basic usage:
 ```js
 import { JustForShow } from 'justforshow';
 
-// Using the 'animate-from' module as preset for on scroll animations 
+// Using the 'animate-from' module as preset for on scroll animations
 // for elements with selector '[data-jfs]'
 new JustForShow('[data-jfs]', 'animate-from');
 ```
 
-In the example above, JFS will be watching for scroll events of the elements with the given selector `'[data-jfs]'`. This needs to be passed as a string as the first parameter. The callback of those scroll events depends on the second parameter, which hold the options. If a string is passed, then JFS will try to look for an included preset with the given name, e.g `'animate-from'`. Otherwise it expects an object which allows for much more detailed options to be set.
+In the example above, JFS will be watching the elements with the given selector `[data-jfs]`. This first parameter needs to be passed as a string. The callback of those scroll events depends on the second parameter, which hold the options. If the second parameter is a string, then JFS will try to look for an included preset with the given name, e.g `'animate-from'`. Otherwise it expects an object which allows for much more detailed options to be set.
 
 Example of the JFS options, which are all set to their default values:
 ```js
 import { JustForShow } from 'justforshow';
 
 new JustForShow(selector, {
-    preset: null, // string or custom preset
-    syncScrollPosition: true, // boolean
+    preset: null,
+    syncScrollPosition: true,
 
     // Intersection observer specific settings
-    root: null, // DOM element
-    rootMargin: '0px 0px 0px 0px', // string
-    threshold: [0], // array
+    root: null,
+    rootMargin: '0px',
+    threshold: 0,
 
     // The event listeners
-    onEnterBottom: (element) => { /* do something */ }, // function
-    onEnterTop: (element) => { /* do something */ }, // function
-    onLeaveBottom: (element) => { /* do something */ }, // function
-    onLeaveTop: (element) => { /* do something */ }, // function
+    onEnterBottom: (element) => { /* do something */ },
+    onEnterTop: (element) => { /* do something */ },
+    onLeaveBottom: (element) => { /* do something */ },
+    onLeaveTop: (element) => { /* do something */ },
 });
 ```
 
-### On scroll animations with `AnimateFrom`
-`AnimateFrom` is a module that holds functionality to make elements animate on scroll based on the JFS event listeners. For this example I'll be using standard [tailwindcss](https://tailwindcss.com) utility classes, as this module was built with the framework in mind. If you don't know what tailwindcss is, I really recommend you check it out. Of course, using any other CSS classes will work fine too!
+## Options
+| Option name | Default value | Description |
+| ------------- | ------------- | ------------- |
+| preset | `null` | Define a preset to handle all functionality in one place. Out of the box JFS includes an 'animate-from' and a 'lazyload' preset. This preset can be used in combination with the hooks the JFS instance provides. Expected values: `String` (JFS preset name) or `Function` (custom preset). |
+| syncScrollPosition | `true` | If this is set to true, it will trigger all animations of elements positioned above or in the current view on page load. Expected values: `Boolean`. |
+| root | `null` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer). |
+| rootMargin | `'0px'` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer) |
+| treshold | `0` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer) |
+| onEnterBottom | `null` | This hook is called when the element enters the viewport from the bottom of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
+| onEnterTop | `null` | This hook is called when the element enters the viewport from the top of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
+| onLeaveBottom | `null` | This hook is called when the element leaves the viewport from the bottom of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
+| onLeaveTop | `null` | This hook is called when the element leaves the viewport from the top of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
+
+## On scroll animations with `AnimateFrom`
+`AnimateFrom` is a module that holds functionality to make elements animate on scroll based on the hooks provided by JFS. For this example we'll be using standard [tailwindcss](https://tailwindcss.com) utility classes, as this module was built with the framework in mind. If you don't know what tailwindcss is, I really recommend you check it out. Of course, using any other CSS classes will work fine too!
 
 Let's start with a bit of HTML:
 ```html
-<body>
-    <!-- Fullscreen element so we can see the on scroll animation magic -->
-    <div class="h-screen"></div>
-
-    <!-- Element to be animated -->
-    <div class="h-16 bg-black">Hello world!</div>
-</body>
+<div class="h-16 bg-black">Please animate me!</div>
 ```
 
-Now you need to initialize JustForShow:
+Now we need to initialize JustForShow:
 ```js
 import { JustForShow } from 'justforshow';
 
@@ -90,39 +97,33 @@ new JustForShow('[data-jfs]', 'animate-from');
 // });
 ```
 
-For JustForShow to create event listeners for this element, we need to make sure the chosen selector corresponds with the element we want to animate:
-```diff
-<body>
-    <!-- Fullscreen element so we can see the on scroll animation magic -->
-    <div class="h-screen"></div>
-
-    <!-- Element to be animated -->
--    <div class="h-16 bg-black">Hello world!</div>
-+    <div data-jfs class="h-16 bg-black transition duration-300">Hello world!</div>
-</body>
+For JustForShow to create hooks for this element, we need to make sure the chosen selector corresponds with the element we want to animate. This selector can be anything to identify the element, in this case `data-jfs`:
+```html
+<div data-jfs class="h-16 bg-black transition duration-300">Please animate me!</div>
 ```
 
-On initialization, `AnimateFrom` will add one or more chosen classes to the element. While scrolling the page, whenever the `onEnterBottom` event triggers for this element, the callback will remove all the choses classes from the element which you can combine - for example - with CSS transitions to create animations.
+On initialization, `AnimateFrom` will add one or more chosen classes to the element. While scrolling the page, whenever the `onEnterBottom` hook is called for this element, the callback will remove all the defined classes from the element. Combined with - for example - CSS transitions, you can create on scroll animations.
+
+Here is how we define the classes from which the element will animate:
+```html
+<div data-jfs data-jfs-from="bg-grey-500" class="h-16 bg-black transition duration-300">Please animate me!</div>
+```
+
+Et voila! Now, whenever we scroll the element in view, its color will change from grey to black. Very fancy! 😎
 
 ***Why does it work this way?**<br>
-By first adding classes and later removing them on scroll, your base styling is completely independent from the workings of your JavaScript. If for any reason JavaScript doesn't work on the page - which would obviously never ever happen in your project - it won't leave elements hanging, waiting for Javascript to animate it to the state it needs to be. They will still have the expected styling, just without those slick animations.*
+By first adding classes and later removing them on scroll, your base styling is completely independent from the workings of your JavaScript. If for any reason JavaScript doesn't work on the page - which would obviously never ever happen in your project - it won't leave elements hanging, waiting for JavaScript to animate it to the state it needs to be. They will still have the expected styling, just without those slick animations.*
 
-Here is how you define the classes where the element *will animate from*:
-```diff
-<body>
-    <!-- Fullscreen element so we can see the on scroll animation magic -->
-    <div class="h-screen"></div>
-
-    <!-- Element to be animated -->
--    <div data-jfs class="h-16 bg-black transition duration-300">Hello world!</div>
-+    <div data-jfs data-jfs-from="bg-grey-500" class="h-16 bg-black transition duration-300">Hello world!</div>
-</body>
+`AnimateFrom` also comes with the possibility to repeat animations every time the user scrolls over them. This can be done by setting another attribute `data-jfs-from-repeat` to the element like this:
+```html
+<div data-jfs data-jfs-from="bg-grey-500" data-jfs-repeat class="h-16 bg-black transition duration-300">Please animate me!</div>
 ```
 
-Et voila! If you now scroll the element in view, its color will change from grey to black. Very fancy! 😎
+## Loading images on scroll with `LazyLoadingImage`
+*Under construction*
 
 ## Browser support
-The IntersectionObserver API is relatively new. Despite that it's supported by all major browser, except for IE. That's why this package also includes [this intersection observer polyfill](https://www.npmjs.com/package/intersection-observer). Props to them! 
+The IntersectionObserver API is relatively new. Despite that it's supported by all major browser, except for IE. That's why this package also includes [this intersection observer polyfill](https://www.npmjs.com/package/intersection-observer). Props to them!
 
 Polyfill usage:
 ```js
