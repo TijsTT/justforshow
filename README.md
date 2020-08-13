@@ -7,7 +7,7 @@ It provides some simple hooks to make it easier for you to implement on scroll f
 Apart from calling these hooks while scrolling, JustForShow also includes a few built-in modules to make use of them.
 
 Modules which are currently included:
--   `AnimateFrom`: on scroll animation based on CSS classes (works great with tailwindcss)
+-   `AnimateFrom`: on scroll animation based on CSS classes
 -   `LazyLoadingImage`: on scroll image lazyloading
 
 ## Installation
@@ -43,7 +43,7 @@ new JustForShow('[data-jfs]', 'animate-from');
 
 In the example above, JFS will be watching the elements with the given selector `[data-jfs]`. This first parameter needs to be passed as a string. The callback of those scroll events depends on the second parameter, which hold the options. If the second parameter is a string, then JFS will try to look for an included preset with the given name, e.g `'animate-from'`. Otherwise it expects an object which allows for much more detailed options to be set.
 
-Example of the JFS options, which are all set to their default values:
+Example of the JFS options:
 ```js
 import { JustForShow } from 'justforshow';
 
@@ -71,7 +71,7 @@ new JustForShow(selector, {
 | syncScrollPosition | `true` | If this is set to true, it will trigger all animations of elements positioned above or in the current view on page load. Expected values: `Boolean`. |
 | root | `null` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer). |
 | rootMargin | `'0px'` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer) |
-| treshold | `0` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer) |
+| threshold | `0` | Official Intersection Observer API option. Expected values and more info on [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer) |
 | onEnterBottom | `null` | This hook is called when the element enters the viewport from the bottom of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
 | onEnterTop | `null` | This hook is called when the element enters the viewport from the top of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
 | onLeaveBottom | `null` | This hook is called when the element leaves the viewport from the bottom of the screen. The element will be passed as a parameter to the callback function. Expected value: `Function`. |
