@@ -56,11 +56,19 @@ new JustForShow(selector, {
     rootMargin: '0px',
     threshold: 0,
 
-    // The event listeners
-    onEnterBottom: (element) => { /* do something */ },
-    onEnterTop: (element) => { /* do something */ },
-    onLeaveBottom: (element) => { /* do something */ },
-    onLeaveTop: (element) => { /* do something */ },
+    // Hooks that will be called ...
+    onEnterBottom: (element) => {
+        // Do something when the element enters the window from the bottom
+    },
+    onEnterTop: (element) => {
+        // Do something when the element enters the window from the top
+    },
+    onLeaveBottom: (element) => {
+        // Do something when the element leaves the window from the bottom
+    },
+    onLeaveTop: (element) => {
+        // Do something when the element leaves the window from the top
+    },
 });
 ```
 
