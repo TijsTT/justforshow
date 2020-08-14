@@ -1,3 +1,7 @@
+/**
+ * Preset handling JustForShow hooks to lazyload images on scroll
+ * @param {DOM Element} element image element that needs to be lazyloaded
+ */
 class LazyLoadingImage {
     constructor(element) {
         this.element = element;

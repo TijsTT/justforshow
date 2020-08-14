@@ -1,6 +1,11 @@
 import { AnimateFrom } from './AnimateFrom';
 import { LazyLoadingImage } from './LazyLoadingImage';
 
+/**
+ * JustForShow provides some simple hooks to make it easier for you to implement on scroll functionality in your project.
+ * @param {} selector selector for the elements which need to be watched
+ * @param {string|object} options preset name as string or options object
+ */
 class JustForShow {
     constructor(selector, options) {
         this.selector = selector;

@@ -1,7 +1,7 @@
-/*
-    Aditional attributes for AnimateFrom:
-    -   data-jfs-repeat
-*/
+/**
+ * Preset handling JustForShow hooks to animate the element on scroll
+ * @param {DOM Element} element the element that needs to be animated
+ */
 class AnimateFrom {
     constructor(element) {
         this.element = element;
