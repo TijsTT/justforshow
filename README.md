@@ -1,5 +1,5 @@
 # JustForShow
-*Note: this documentation is still under construction. If you have any questions, just open an issue!*
+***Note:** this documentation is still under construction. If you have any questions, just open an issue!*
 
 JustForShow is a dependency-free package built using the Intersection Observer API.<br>
 It provides some simple hooks to make it easier for you to implement on scroll functionality in your project.
@@ -64,6 +64,50 @@ new JustForShow(selector, {
 });
 ```
 
+### Example #1
+***Case:** you want to log an elements id to the console every time it scrolls into view.*
+
+Example HTML:
+```html
+<div class="min-h-screen">Some full screen content</div>
+
+<div data-jfs id="just"></div>
+<div data-jfs id="for"></div>
+<div data-jfs id="show"></div>
+
+<div class="min-h-screen">Some full screen content</div>
+```
+Initializing JustForShow:
+```js
+import { JustForShow } from 'justforshow';
+
+new JustForShow('[data-jfs]', {
+    onEnterBottom: (element) => {
+        console.log(element.id);
+    },
+    onEnterTop: (element) => {
+        console.log(element.id);
+    }
+})
+```
+
+When you now scroll down from top to bottom, your console output will be:
+```console
+"just"
+"for"
+"show"
+```
+
+Now if you scroll back to the top of the page, the output should look like this:
+```console
+"just"
+"for"
+"show"
+"show"
+"for"
+"just"
+```
+
 ## Options
 | Option name | Default value | Description |
 | ------------- | ------------- | ------------- |
@@ -90,11 +134,6 @@ Now we need to initialize JustForShow:
 import { JustForShow } from 'justforshow';
 
 new JustForShow('[data-jfs]', 'animate-from');
-
-// Or an equal initialization with the option object:
-// new JustForShow('[data-jfs]', {
-//    preset: 'animate-from'
-// });
 ```
 
 For JustForShow to create hooks for this element, we need to make sure the chosen selector corresponds with the element we want to animate. This selector can be anything to identify the element, in this case `data-jfs`:
@@ -120,7 +159,20 @@ By first adding classes and later removing them on scroll, your base styling is 
 ```
 
 ## Loading images on scroll with `LazyLoadingImage`
-*Under construction*
+`LazyLoadingImage` is a module that loads images only when they are scrolled into view. This comes in very handy when you want to minimize the page load time. Setting it up is very easy:
+```html
+<img data-jfs-lazyload src="/justforshow.png" alt="JustForShow is awesome" width="1600" height="900">
+```
+```js
+import { JustForShow } from 'justforshow';
+
+// Notice how using the module specific selector here perfectly does the job!
+new JustForShow('[data-jfs-lazyload]', 'lazyload');
+```
+
+That's all. It just works ... ✨
+
+At the moment, `LazyLoadingImage` only works with `img` tags. In the future `background-image` and others will be supported too.
 
 ## Browser support
 The IntersectionObserver API is relatively new. Despite that it's supported by all major browser, except for IE. That's why this package also includes [this intersection observer polyfill](https://www.npmjs.com/package/intersection-observer). Props to them!
