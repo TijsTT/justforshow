@@ -1,7 +1,7 @@
 // Polyfills
 export { IntersectionObserverPolyFill } from './polyfills/IntersectionObserverPolyfill';
 export { ArrayFindPolyfill } from './polyfills/ArrayFindPolyfill';
-export { IEPolyfills } from './polyfills/IEPolyfills';
+export { JustForShowPolyfills } from './polyfills/JustForShowPolyfills';
 
 // Modules
 export { AnimateFrom } from './modules/AnimateFrom';

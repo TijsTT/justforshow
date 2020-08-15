@@ -1,9 +1,9 @@
 import { IntersectionObserverPolyFill } from './IntersectionObserverPolyfill';
 import { ArrayFindPolyfill } from './ArrayFindPolyfill';
 
-const IEPolyfills = () => {
+const JustForShowPolyfills = () => {
     IntersectionObserverPolyFill();
     ArrayFindPolyfill();
 }
 
-export { IEPolyfills };
+export { JustForShowPolyfills };

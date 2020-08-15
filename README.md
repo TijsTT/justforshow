@@ -24,12 +24,14 @@ import { JustForShow } from 'justforshow';
 import { AnimateFrom } from 'justforshow';
 import { LazyLoadingImage } from 'justforshow';
 import { IntersectionObserverPolyfill } from 'justforshow';
+import { ArrayFindPolyfill } from 'justforshow';
+import { JustForShowPolyfills } from 'justforshow';
 
 // If you want the whole experience, you can include all modules like this
-import { JustForShow, IntersectionObserverPolyfill } from 'justforshow';
+import { JustForShow, JustForShowPolyfills } from 'justforshow';
 ```
 
-Importing the JustForShow module will also include the `AnimateFrom` and `LazyLoadingImage` module, as it can't work without these modules. Any other module can be imported on its own to reduce file size if you would want to.
+Importing the `JustForShow` module will also include the `AnimateFrom` and `LazyLoadingImage` module, as it can't work without these modules. Same goes for `JustForShowPolyfills`, which includes all polyfill modules. Any other module can be imported on its own to reduce file size if you would want to.
 
 ## Usage
 Most basic usage:
@@ -193,5 +195,23 @@ import { JustForShow, IntersectionObserverPolyfill } from 'justforshow';
 IntersectionObserverPolyfill();
 
 // Then do your JustForShow magic
+new JustForShow('[data-jfs]', 'animate-from');
+```
+
+For JustForShow to be fully functional in IE, you will also need a polyfill for `array.prototype.find`. For your convenience this is also available to import:
+```js
+import { JustForShow, ArrayFindPolyfill } from 'justforshow';
+
+ArrayFindPolyfill();
+
+new JustForShow('[data-jfs]', 'animate-from');
+```
+
+Finally, for people that don't care about file size and just want it to work everywhere, you can use `JustForShowPolyfills'. This method bundles all polyfills together:
+```js
+import { JustForShow, JustForShowPolyfills } from 'justforshow';
+
+JustForShowPolyfills();
+
 new JustForShow('[data-jfs]', 'animate-from');
 ```

@@ -8,3 +8,4 @@
     <!-- - options rundown -->
     <!-- - hooks vs event listeners -->
     - carefull: css class styles might not be applied because they have 'more important' styles
+    - add extra polyfill functionality
