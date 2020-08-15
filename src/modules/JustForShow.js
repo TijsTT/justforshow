@@ -32,7 +32,7 @@ class JustForShow {
         this.onLeaveBottom = this.options.onLeaveBottom;
         this.onLeaveTop = this.options.onLeaveTop;
 
-        this.elements = [...document.querySelectorAll(selector)];
+        this.elements = Array.from(document.querySelectorAll(selector));
 
         this.instances = this._createInstances();
 

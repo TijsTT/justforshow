@@ -27,23 +27,34 @@ class AnimateFrom {
         // return if object intersected before, unless repeat is true
         if(this.intersected) return;
 
-        this.element.classList.remove(...this.classes);
+        this.classes.forEach((cssClass) => {
+            this.element.classList.remove(cssClass);
+        })
+
         this.intersected = true;
     }
 
     onLeaveBottom() {
         if(!this.repeat) return;
 
-        this.element.classList.add(...this.classes);
+        this.classes.forEach((cssClass) => {
+            this.element.classList.add(cssClass);
+        })
+
         this.intersected = false;
     }
 
     _addFromClassesToElement() {
         // Adding these classes would trigger the transition, so we first disable that and enable it again after the classes are added
         this.element.style.transition = "none";
-        this.element.classList.add(...this.classes);
+
+        this.classes.forEach((cssClass) => {
+            this.element.classList.add(cssClass);
+        });
+
         // nasty trick to update CSS properties instantly to prevent transition-none properties from still being active
         void this.element.offsetHeight;
+
         this.element.style.removeProperty('transition');
     }
 
